@@ -21,7 +21,7 @@ static fp32 motor_LZ_max_min(fp32 proto,fp32 max,fp32 min){
 } 
 
 /**
-  * @brief          Áé×ãµç»ú³õÊ¼»¯
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
   * @param[in]      none
   * @retval         none
   */
@@ -48,9 +48,9 @@ void motor_LZ_init(){
 }
 
 /**
-  * @brief          Áé×ãµç»úÍâ²¿¿ØÖÆ²ÎÊý»ñÈ¡
-  * @param[in]      id µç»úid
-  * @param[in]    	*Data_send Êý¾ÝÖ¸Õë
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â²¿ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ï¿½ï¿½È¡
+  * @param[in]      id ï¿½ï¿½ï¿½id
+  * @param[in]    	*Data_send ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
   * @retval         none
   */
 void motor_LZ_send_init(uint8_t id,user_send_Lz  *Data_send){
@@ -59,17 +59,17 @@ void motor_LZ_send_init(uint8_t id,user_send_Lz  *Data_send){
 }
 
 /**
-  * @brief          Áé×ãµç»ú·µ»ØÊý¾Ý»ñÈ¡
-  * @param[in]      id µç»úid
-  * @retval         user_recv_Lz Êý¾ÝÖ¸Õë
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½È¡
+  * @param[in]      id ï¿½ï¿½ï¿½id
+  * @retval         user_recv_Lz ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
   */
 const user_recv_Lz *motor_LZ_recv_return(uint8_t id){
 	return &motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_recv;
 }
 
 /**
-  * @brief          Áé×ãµç»úÊý¾Ý·¢ËÍ
-  * @param[in]      id µç»úid
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½
+  * @param[in]      id ï¿½ï¿½ï¿½id
   * @retval         none
   */
 static void motor_LZ_Handle_send(uint8_t id){
@@ -84,49 +84,47 @@ static void motor_LZ_Handle_send(uint8_t id){
 }
 
 /**
-  * @brief          Áé×ãµç»ú¿ØÖÆÊý¾Ý´¦Àí
-  * @param[in]      id µç»úid
-  * @param[in]		µç»úÊý¾Ý´¦ÀíÊý×é
-  * @param[in]		modelµç»úÐÍºÅ
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½
+  * @param[in]      id ï¿½ï¿½ï¿½id
+  * @param[in]		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  * @param[in]		modelï¿½ï¿½ï¿½ï¿½Íºï¿½
   * @retval         none
   */
 static void motor_LZ_send_handle(uint8_t id,uint16_t *motor,uint8_t model){
-	motor_LZ *motor_data;
-	motor_data = motor_LZ_send_recv + motor_LZ_id_seat[id];
 	switch(model){
 		case MOTOR_LZ_02:
-			motor_data->Data_send->Angle = 
-					motor_LZ_max_min(motor_data->Data_send->Angle,12.57f,-12.57f);
-			motor_data->Data_send->W =
-								motor_LZ_max_min(motor_data->Data_send->W,44.00f,-44.00f);
-			motor_data->Data_send->T =           
-								motor_LZ_max_min(motor_data->Data_send->T,17.0f,-17.0f);
-			motor_data->Data_send->Kd =          
-								motor_LZ_max_min(motor_data->Data_send->Kd,5.0f,0.0f);
-			motor_data->Data_send->Kp =         
-								motor_LZ_max_min(motor_data->Data_send->Kp,500.0f,0.0f);
-			motor[0]=(uint16_t)((motor_data->Data_send->Angle+12.57f)*65535/25.14f);
-			motor[1] = (uint16_t)((motor_data->Data_send->W+44.00f)*65535/88.0f);
-			motor[2] = (uint16_t)((motor_data->Data_send->T+17.0f)*65535/34.0f);
-			motor[3] = (uint16_t)((motor_data->Data_send->Kp*65535/500.0f));
-			motor[4] = (uint16_t)((motor_data->Data_send->Kd*65535/5.00f));
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Angle = 
+					motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Angle,12.57f,-12.57f);
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->W =
+								motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->W,44.00f,-44.00f);
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->T =
+								motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->T,17.0f,-17.0f);
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kd =
+								motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kd,5.0f,0.0f);
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kp =
+								motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kp,500.0f,0.0f);
+			motor[0]=(uint16_t)((motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Angle+12.57f)*65535/25.14f);
+			motor[1] = (uint16_t)((motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->W+44.00f)*65535/88.0f);
+			motor[2] = (uint16_t)((motor_LZ_send_recv[id].Data_send->T+17.0f)*65535/34.0f);
+			motor[3] = (uint16_t)((motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kp*65535/500.0f));
+			motor[4] = (uint16_t)((motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kd*65535/5.00f));
 		break;
 		case MOTOR_LZ_05 :
-			motor_data->Data_send->Angle = 
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Angle = 
 					motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Angle,12.57f,-12.57f);
-			motor_data->Data_send->W =
-								motor_LZ_max_min(motor_data->Data_send->W,50.00f,-50.00f);
-			motor_data->Data_send->T =
-								motor_LZ_max_min(motor_data->Data_send->T,5.5f,-5.5f);
-			motor_data->Data_send->Kd =
-								motor_LZ_max_min(motor_data->Data_send->Kd,5.0f,0.0f);
-			motor_data->Data_send->Kp =
-								motor_LZ_max_min(motor_data->Data_send->Kp,500.0f,0.0f);
-			motor[0]=(uint16_t)((motor_data->Data_send->Angle+12.57f)*65535/25.14f);
-			motor[1] = (uint16_t)((motor_data->Data_send->W+50.0f)*65535/100.0f);
-			motor[2] = (uint16_t)((motor_data->Data_send->T+5.5f)*65535/11.0f);
-			motor[3] = (uint16_t)((motor_data->Data_send->Kp*65535/500.0f));
-			motor[4] = (uint16_t)((motor_data->Data_send->Kd*65535/5.0f));
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->W =
+								motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->W,50.00f,-50.00f);
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->T =
+								motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->T,5.5f,-5.5f);
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kd =
+								motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kd,5.0f,0.0f);
+			motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kp =
+								motor_LZ_max_min(motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kp,500.0f,0.0f);
+			motor[0]=(uint16_t)((motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Angle+12.57f)*65535/25.14f);
+			motor[1] = (uint16_t)((motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->W+50.0f)*65535/100.0f);
+			motor[2] = (uint16_t)((motor_LZ_send_recv[id].Data_send->T+5.5f)*65535/11.0f);
+			motor[3] = (uint16_t)((motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kp*65535/500.0f));
+			motor[4] = (uint16_t)((motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_send->Kd*65535/5.0f));
 		break;
 		default:
 		{
@@ -137,40 +135,38 @@ static void motor_LZ_send_handle(uint8_t id,uint16_t *motor,uint8_t model){
 }
 
 /**
-  * @brief          Áé×ãµç»ú¿ØÖÆÊý¾Ý´¦Àí
-  * @param[in]      id µç»úid
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½
+  * @param[in]      id ï¿½ï¿½ï¿½id
   * @retval         none
   */
 void motor_LZ_send(uint8_t id){
-	motor_LZ *motor_data;
-	motor_data = motor_LZ_send_recv + motor_LZ_id_seat[id];
 	uint16_t motor_LZ_send[5];
-	motor_data->DataHanding.exld.id = id;
-	motor_data->DataHanding.exld.mode = CANCOM_MOTOR_CTRL;
-	motor_data->DataHanding.len = 8;
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.exld.id = id;
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.exld.mode = CANCOM_MOTOR_CTRL;
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.len = 8;
 	
-	motor_LZ_send_handle(id,motor_LZ_send,motor_data->model);
+	motor_LZ_send_handle(id,motor_LZ_send,motor_LZ_send_recv[motor_LZ_id_seat[id]].model);
 	
-	motor_data->DataHanding.exld.data = motor_LZ_send[2];
-	motor_data->DataHanding.Data[0]=motor_LZ_send[0]>>8;
-	motor_data->DataHanding.Data[1]=motor_LZ_send[0];
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.exld.data = motor_LZ_send[2];
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.Data[0]=motor_LZ_send[0]>>8;
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.Data[1]=motor_LZ_send[0];
 	
-	motor_data->DataHanding.Data[2]=motor_LZ_send[1]>>8;
-	motor_data->DataHanding.Data[3]=motor_LZ_send[1];
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.Data[2]=motor_LZ_send[1]>>8;
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.Data[3]=motor_LZ_send[1];
 	
-	motor_data->DataHanding.Data[4]=motor_LZ_send[3]>>8;
-	motor_data->DataHanding.Data[5]=motor_LZ_send[3];	
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.Data[4]=motor_LZ_send[3]>>8;
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.Data[5]=motor_LZ_send[3];	
 	
-	motor_data->DataHanding.Data[6]=motor_LZ_send[4]>>8;
-	motor_data->DataHanding.Data[7]=motor_LZ_send[4];
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.Data[6]=motor_LZ_send[4]>>8;
+	motor_LZ_send_recv[motor_LZ_id_seat[id]].DataHanding.Data[7]=motor_LZ_send[4];
 	
 	motor_LZ_Handle_send(motor_LZ_id_seat[id]);
 
 }
 
 /**
-  * @brief          Áé×ãµç»úÊ¹ÄÜ
-  * @param[in]      id µç»úid
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
+  * @param[in]      id ï¿½ï¿½ï¿½id
   * @retval         none
   */
 void motor_LZ_enable(uint8_t id){
@@ -186,8 +182,8 @@ void motor_LZ_enable(uint8_t id){
 }
 
 /**
-  * @brief          Áé×ãµç»úÊ§ÄÜ
-  * @param[in]      id µç»úid
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
+  * @param[in]      id ï¿½ï¿½ï¿½id
   * @retval         none
   */
 void motor_LZ_lose(uint8_t id){
@@ -203,9 +199,9 @@ void motor_LZ_lose(uint8_t id){
 }
 
 /**
-  * @brief          Áé×ãµç»úÖ÷¶¯ÉÏ±¨Ö¡
-  * @param[in]      id µç»úid
-  * @param[in]		F_CMDÄ£Ê½¸ü¸Ä 00¹Ø 01¿ªÆô
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½Ö¡
+  * @param[in]      id ï¿½ï¿½ï¿½id
+  * @param[in]		F_CMDÄ£Ê½ï¿½ï¿½ï¿½ï¿½ 00ï¿½ï¿½ 01ï¿½ï¿½ï¿½ï¿½
   * @retval         none
   */
 void motor_LZ_active_recv(uint8_t id,uint8_t F_CMD){
@@ -221,8 +217,8 @@ void motor_LZ_active_recv(uint8_t id,uint8_t F_CMD){
 
 }
 /**
-  * @brief          Áé×ãµç»úÉèÖÃ»úÐµÁãµã »á°Ñµ±Ç°µç»úÎ»ÖÃÉèÎª»úÐµÁãÎ»£¬ »áÏÈÊ§ÄÜµç»ú, ÔÙÊ¹ÄÜµç»ú
-  * @param[in]      id µç»úid
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ðµï¿½ï¿½ï¿½ ï¿½ï¿½Ñµï¿½Ç°ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ðµï¿½ï¿½Î»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Üµï¿½ï¿½, ï¿½ï¿½Ê¹ï¿½Üµï¿½ï¿½
+  * @param[in]      id ï¿½ï¿½ï¿½id
   * @retval         none
   */
 void motor_LZ_zero(uint8_t id){
@@ -237,9 +233,9 @@ void motor_LZ_zero(uint8_t id){
 	motor_LZ_enable(id);
 }
 /**
-  * @brief          Áé×ãµç»úÉèÖÃCAN_ID  Ê§ÄÜµç»ú
-  * @param[in]      id µç»úid
-  * @param[in] 		ÐÞ¸Äºó£¨Ô¤Éè£©CANID
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CAN_ID  Ê§ï¿½Üµï¿½ï¿½
+  * @param[in]      id ï¿½ï¿½ï¿½id
+  * @param[in] 		ï¿½Þ¸Äºï¿½Ô¤ï¿½è£©CANID
   * @retval         none
   */
 void motor_LZ_set_CAN_ID(uint8_t id,uint8_t set_id){
@@ -255,29 +251,27 @@ void motor_LZ_set_CAN_ID(uint8_t id,uint8_t set_id){
 }
 
 /**
-  * @brief          Áé×ãµç»ú·µ»ØÊý¾Ý»ñÈ¡
-  * @param[in]      id µç»úid
-  * @param[in]		Data ExtIdÊý¾Ý´«Êä 
-  * @param[in]		dataÊý×é
-  * @param[in]		modelµç»úÐÍºÅ
+  * @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½È¡
+  * @param[in]      id ï¿½ï¿½ï¿½id
+  * @param[in]		Data ExtIdï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ 
+  * @param[in]		dataï¿½ï¿½ï¿½ï¿½
+  * @param[in]		modelï¿½ï¿½ï¿½ï¿½Íºï¿½
   * @retval         none
   */
 static void motor_LC_recv_data(uint8_t id, uint32_t Data , uint8_t *data,uint8_t model){
-	motor_LZ *motor_data;
-	motor_data = motor_LZ_send_recv + motor_LZ_id_seat[id];
 	
-	motor_data->Data_recv.Angle = (fp32)(data[0]<<8|data[1])*(fp32)12.57f/32768-12.57f;
-	motor_data->Data_recv.Temp  = (fp32)(data[6]<<8|data[7])/10.0f;
-	motor_data->Data_recv.MError= Data>>16&0x3F;
-	motor_data->Data_recv.mode  = Data>>22&0x03;	
+	motor_LZ_send_recv[id].Data_recv.Angle = (fp32)(data[0]<<8|data[1])*(fp32)12.57f/32768-12.57f;
+	motor_LZ_send_recv[id].Data_recv.Temp  = (fp32)(data[6]<<8|data[7])/10.0f;
+	motor_LZ_send_recv[id].Data_recv.MError= Data>>16&0x3F;
+	motor_LZ_send_recv[id].Data_recv.mode  = Data>>22&0x03;
 	switch(model){
 		case MOTOR_LZ_02:
-			motor_data->Data_recv.W     = (fp32)(data[2]<<8|data[3])*(fp32)11.0f/8192-44.0f;
-			motor_data->Data_recv.T     = (fp32)(data[4]<<8|data[5])*(fp32)17.0f/32768-17.0f;
+			motor_LZ_send_recv[id].Data_recv.W     = (fp32)(data[2]<<8|data[3])*(fp32)11.0f/8192-44.0f;
+			motor_LZ_send_recv[id].Data_recv.T     = (fp32)(data[4]<<8|data[5])*(fp32)17.0f/32768-17.0f;
 		break;
 		case MOTOR_LZ_05 :
-			motor_data->Data_recv.W     = (fp32)(data[2]<<8|data[3])*(fp32)12.5f/8192-50.0f;
-			motor_data->Data_recv.T     = (fp32)(data[4]<<8|data[5])*(fp32)5.5f/32768-5.5f;
+			motor_LZ_send_recv[id].Data_recv.W     = (fp32)(data[2]<<8|data[3])*(fp32)12.5f/8192-50.0f;
+			motor_LZ_send_recv[id].Data_recv.T     = (fp32)(data[4]<<8|data[5])*(fp32)5.5f/32768-5.5f;
 		break;
 		default:
 		{
@@ -291,8 +285,8 @@ static void motor_LC_recv_data(uint8_t id, uint32_t Data , uint8_t *data,uint8_t
 
 
 /**
-  * @brief          can½ÓÊÕ»Øµ÷º¯Êý
-  * @param[in]      hcan hcanÖ¸Õë
+  * @brief          canï¿½ï¿½ï¿½Õ»Øµï¿½ï¿½ï¿½ï¿½ï¿½
+  * @param[in]      hcan hcanÖ¸ï¿½ï¿½
   * @retval         none
   */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
