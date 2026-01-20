@@ -973,6 +973,11 @@
           <GroupName>application</GroupName>
           <Files>
             <File>
+              <FileName>remote_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\application\remote_control.c</FilePath>
+            </File>
+            <File>
               <FileName>motor_LZ.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\application\motor_LZ.c</FilePath>
@@ -991,6 +996,11 @@
               <FileName>bsp_can.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\bsp\boards\bsp_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_rc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\boards\bsp_rc.c</FilePath>
             </File>
           </Files>
         </Group>

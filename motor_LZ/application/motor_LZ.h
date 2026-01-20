@@ -5,7 +5,7 @@
 
 #include "bsp_can.h"
 
-#define motor_LZ_N 1
+#define motor_LZ_N 2
 #define motor_LZ_user_id 0
 #define LZ_CAN  hcan1
 
@@ -113,12 +113,6 @@ void motor_LZ_send_init(uint8_t id,user_send_Lz  *Data_send);
   * @retval         user_recv_Lz 数据指针
   */
 const user_recv_Lz *motor_LZ_recv_return(uint8_t id);
-/**
-  * @brief          灵足电机数据发送
-  * @param[in]      id 电机id
-  * @retval         none
-  */
-static void motor_LZ_Handle_send(uint8_t id);
 /**
   * @brief          灵足电机控制数据处理
   * @param[in]      id 电机id

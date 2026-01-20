@@ -5,7 +5,7 @@ extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
 
 static Motor_LZ_Init motor_LZ_id[motor_LZ_N]={
-//				{1,MOTOR_LZ_05},
+				{1,MOTOR_LZ_05},
 				{2,MOTOR_LZ_02}
 };
 
@@ -21,7 +21,7 @@ static fp32 motor_LZ_max_min(fp32 proto,fp32 max,fp32 min){
 } 
 
 /**
-  * @brief          Áé×ãµç»ú³õÊ¼»¯
+  * @brief          çµè¶³ç”µæœºåˆå§‹åŒ–
   * @param[in]      none
   * @retval         none
   */
@@ -48,9 +48,9 @@ void motor_LZ_init(){
 }
 
 /**
-  * @brief          Áé×ãµç»úÍâ²¿¿ØÖÆ²ÎÊı»ñÈ¡
-  * @param[in]      id µç»úid
-  * @param[in]    	*Data_send Êı¾İÖ¸Õë
+  * @brief          çµè¶³ç”µæœºå¤–éƒ¨æ§åˆ¶å‚æ•°è·å–
+  * @param[in]      id ç”µæœºid
+  * @param[in]    	*Data_send æ•°æ®æŒ‡é’ˆ
   * @retval         none
   */
 void motor_LZ_send_init(uint8_t id,user_send_Lz  *Data_send){
@@ -59,23 +59,23 @@ void motor_LZ_send_init(uint8_t id,user_send_Lz  *Data_send){
 }
 
 /**
-  * @brief          Áé×ãµç»ú·µ»ØÊı¾İ»ñÈ¡
-  * @param[in]      id µç»úid
-  * @retval         user_recv_Lz Êı¾İÖ¸Õë
+  * @brief          çµè¶³ç”µæœºè¿”å›æ•°æ®è·å–
+  * @param[in]      id ç”µæœºid
+  * @retval         user_recv_Lz æ•°æ®æŒ‡é’ˆ
   */
 const user_recv_Lz *motor_LZ_recv_return(uint8_t id){
 	return &motor_LZ_send_recv[motor_LZ_id_seat[id]].Data_recv;
 }
 
 /**
-  * @brief          Áé×ãµç»úÊı¾İ·¢ËÍ
-  * @param[in]      id µç»úid
+  * @brief          çµè¶³ç”µæœºæ•°æ®å‘é€
+  * @param[in]      id ç”µæœºid
   * @retval         none
   */
 static void motor_LZ_Handle_send(uint8_t id){
 	uint32_t motor_LZ_send_box;
 	motor_LZ_tx.ExtId = motor_LZ_send_recv[id].DataHanding.exld.mode<<24
-						|motor_LZ_send_recv[id].DataHanding.exld.data<<8|motor_LZ_send_recv[0].DataHanding.exld.id;
+						|motor_LZ_send_recv[id].DataHanding.exld.data<<8|motor_LZ_send_recv[id].DataHanding.exld.id;
 	motor_LZ_tx.IDE = CAN_ID_EXT ;
 	motor_LZ_tx.RTR = CAN_RTR_DATA ;
 	motor_LZ_tx.DLC = motor_LZ_send_recv[id].DataHanding.len;
@@ -84,10 +84,10 @@ static void motor_LZ_Handle_send(uint8_t id){
 }
 
 /**
-  * @brief          Áé×ãµç»ú¿ØÖÆÊı¾İ´¦Àí
-  * @param[in]      id µç»úid
-  * @param[in]		µç»úÊı¾İ´¦ÀíÊı×é
-  * @param[in]		modelµç»úĞÍºÅ
+  * @brief          çµè¶³ç”µæœºæ•°æ®çš„æ˜ å°„
+  * @param[in]      id ç”µæœºid
+  * @param[in]      motorå¤„ç†æ•°æ®çš„æ•°ç»„
+* @param[in]        model ç”µæœºå‹å·
   * @retval         none
   */
 static void motor_LZ_send_handle(uint8_t id,uint16_t *motor,uint8_t model){
@@ -137,8 +137,8 @@ static void motor_LZ_send_handle(uint8_t id,uint16_t *motor,uint8_t model){
 }
 
 /**
-  * @brief          Áé×ãµç»ú¿ØÖÆÊı¾İ´¦Àí
-  * @param[in]      id µç»úid
+  * @brief          çµè¶³ç”µæœºæ§åˆ¶æ•°æ®å¤„ç†
+  * @param[in]      id ç”µæœºid
   * @retval         none
   */
 void motor_LZ_send(uint8_t id){
@@ -169,8 +169,8 @@ void motor_LZ_send(uint8_t id){
 }
 
 /**
-  * @brief          Áé×ãµç»úÊ¹ÄÜ
-  * @param[in]      id µç»úid
+  * @brief          çµè¶³ç”µæœºä½¿èƒ½
+  * @param[in]      id ç”µæœºid
   * @retval         none
   */
 void motor_LZ_enable(uint8_t id){
@@ -186,8 +186,8 @@ void motor_LZ_enable(uint8_t id){
 }
 
 /**
-  * @brief          Áé×ãµç»úÊ§ÄÜ
-  * @param[in]      id µç»úid
+  * @brief          çµè¶³ç”µæœºå¤±èƒ½
+  * @param[in]      id ç”µæœºid
   * @retval         none
   */
 void motor_LZ_lose(uint8_t id){
@@ -203,9 +203,9 @@ void motor_LZ_lose(uint8_t id){
 }
 
 /**
-  * @brief          Áé×ãµç»úÖ÷¶¯ÉÏ±¨Ö¡
-  * @param[in]      id µç»úid
-  * @param[in]		F_CMDÄ£Ê½¸ü¸Ä 00¹Ø 01¿ªÆô
+  * @brief          çµè¶³ç”µæœºä¸»åŠ¨ä¸ŠæŠ¥å¸§
+  * @param[in]      id ç”µæœºid
+  * @param[in]		F_CMDæ¨¡å¼æ›´æ”¹ 00å…³ 01å¼€å¯
   * @retval         none
   */
 void motor_LZ_active_recv(uint8_t id,uint8_t F_CMD){
@@ -221,8 +221,8 @@ void motor_LZ_active_recv(uint8_t id,uint8_t F_CMD){
 
 }
 /**
-  * @brief          Áé×ãµç»úÉèÖÃ»úĞµÁãµã »á°Ñµ±Ç°µç»úÎ»ÖÃÉèÎª»úĞµÁãÎ»£¬ »áÏÈÊ§ÄÜµç»ú, ÔÙÊ¹ÄÜµç»ú
-  * @param[in]      id µç»úid
+  * @brief          çµè¶³ç”µæœºè®¾ç½®æœºæ¢°é›¶ç‚¹ ä¼šæŠŠå½“å‰ç”µæœºä½ç½®è®¾ä¸ºæœºæ¢°é›¶ä½ï¼Œ ä¼šå…ˆå¤±èƒ½ç”µæœº, å†ä½¿èƒ½ç”µæœº
+  * @param[in]      id ç”µæœºid
   * @retval         none
   */
 void motor_LZ_zero(uint8_t id){
@@ -237,9 +237,9 @@ void motor_LZ_zero(uint8_t id){
 	motor_LZ_enable(id);
 }
 /**
-  * @brief          Áé×ãµç»úÉèÖÃCAN_ID  Ê§ÄÜµç»ú
-  * @param[in]      id µç»úid
-  * @param[in] 		ĞŞ¸Äºó£¨Ô¤Éè£©CANID
+  * @brief          çµè¶³ç”µæœºè®¾ç½®CAN_ID  å¤±èƒ½ç”µæœº
+  * @param[in]      id ç”µæœºid
+  * @param[in] 		ä¿®æ”¹åï¼ˆé¢„è®¾ï¼‰CANID
   * @retval         none
   */
 void motor_LZ_set_CAN_ID(uint8_t id,uint8_t set_id){
@@ -255,11 +255,11 @@ void motor_LZ_set_CAN_ID(uint8_t id,uint8_t set_id){
 }
 
 /**
-  * @brief          Áé×ãµç»ú·µ»ØÊı¾İ»ñÈ¡
-  * @param[in]      id µç»úid
-  * @param[in]		Data ExtIdÊı¾İ´«Êä 
-  * @param[in]		dataÊı×é
-  * @param[in]		modelµç»úĞÍºÅ
+  * @brief          ç”µæœºæ¥æ”¶æ•°æ®çš„æ˜ å°„
+  * @param[in]      id ç”µæœºid
+  * @param[in]		Data ExtIdæ•°æ® 
+  * @param[in]		data canè¿”å›æ•°æ®æ•°ç»„
+  * @param[in]		modelç”µæœºå‹å·
   * @retval         none
   */
 static void motor_LC_recv_data(uint8_t id, uint32_t Data , uint8_t *data,uint8_t model){
@@ -291,8 +291,8 @@ static void motor_LC_recv_data(uint8_t id, uint32_t Data , uint8_t *data,uint8_t
 
 
 /**
-  * @brief          can½ÓÊÕ»Øµ÷º¯Êı
-  * @param[in]      hcan hcanÖ¸Õë
+  * @brief          cançš„å›è°ƒå‡½æ•°
+  * @param[in]      hcan hcanÖ¸æŒ‡é’ˆ
   * @retval         none
   */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
@@ -307,7 +307,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		switch(mode){
 			case 0x18:
 			case 0x2 :
-				motor_LC_recv_data(motor_LZ_id_seat[id],rx_header.ExtId,rx_data,motor_LZ_send_recv[motor_LZ_id_seat[id]].model);
+				motor_LC_recv_data(id,rx_header.ExtId,rx_data,motor_LZ_send_recv[motor_LZ_id_seat[id]].model);
 			break;
 			default:
 			{

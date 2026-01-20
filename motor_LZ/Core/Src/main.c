@@ -34,9 +34,9 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-user_send_Lz motor_send;
-const user_recv_Lz *motor_recv;
-uint8_t motor_id=2,bl=0;
+user_send_Lz motor_send[2];
+const user_recv_Lz *motor_recv[2];
+uint8_t motor_id[2]={1,2},bl=0;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -109,8 +109,10 @@ int main(void)
   MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 	motor_LZ_init();
-	motor_LZ_send_init(motor_id,&motor_send);
-	motor_recv = motor_LZ_recv_return(motor_id);
+	for(uint8_t i=0;i<motor_LZ_N;++i){
+		motor_LZ_send_init(motor_id[i],&motor_send[i]);
+		motor_recv[i] = motor_LZ_recv_return(motor_id[i]);
+	}
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,12 +122,13 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//	if(bl){
-		motor_LZ_send(motor_id);
-	  HAL_Delay(1);
-//		bl=0;
-//	}	 
-  }
+	if(bl){
+		for(uint8_t i=0;i<motor_LZ_N;++i){
+			motor_LZ_send(motor_id[i]);
+			HAL_Delay(1);
+		}	 
+	}
+   }
   /* USER CODE END 3 */
 }
 
